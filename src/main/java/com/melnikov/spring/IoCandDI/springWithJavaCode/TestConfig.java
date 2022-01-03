@@ -11,31 +11,23 @@ import java.util.Scanner;
 
 public class TestConfig {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        List<Integer> l = new ArrayList<>();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyConfiguration.class);
+
+        Garage garage = context.getBean("garageBean", Garage.class);
+
+        Mercedes mercedes = context.getBean("mercedesBean", Mercedes.class);
+        BMW bmw = context.getBean("bmwBean", BMW.class);
+
+        garage.parkCar(mercedes);
+        garage.parkCar(bmw);
+
+        garage.carsParked();
+
+        context.close();
     }
 
 
-    public static int diagonalDifference(List<List<Integer>> arr) {
-        int mainD = 0;
-        int reverseD = 0;
-        for (int i = 0; i < arr.size(); i++) {
-            for (int j = 0; j < arr.get(i).size(); j++) {
-                if (i == j){
-                    mainD+=arr.get(i).get(j);
-                }
-            }
-        }
-        for (int i = arr.size()-1; i != 0; i--) {
-            for (int j = 0; j < arr.get(i).size(); j++) {
-                if (i == ((arr.get(i).size() - 1) - i)){
-                    reverseD+=arr.get(i).get(j);
-                }
-            }
-        }
-        return Math.abs(mainD - reverseD);
 
-    }
 
 
 }
