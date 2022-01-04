@@ -5,22 +5,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class Test {
+public class Test5 {
     public static void main(String[] args) {
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
+                .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
 
         try {
             Session session = sessionFactory.getCurrentSession();
 
-            Employee employee = new Employee("Sergey", "Jopov", "Tokyo", 2250);
-
             session.beginTransaction();
-            session.save(employee);
+
+            session.createQuery("delete Employee where name = 'Anton'").executeUpdate();
+
             session.getTransaction().commit();
         }
+
         finally {
             sessionFactory.close();
         }

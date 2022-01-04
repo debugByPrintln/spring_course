@@ -5,20 +5,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class Test {
+public class Test4 {
     public static void main(String[] args) {
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
+                .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
 
         try {
             Session session = sessionFactory.getCurrentSession();
-
-            Employee employee = new Employee("Sergey", "Jopov", "Tokyo", 2250);
-
             session.beginTransaction();
-            session.save(employee);
+
+            session.createQuery("update Employee set salary = 3000 where name = 'Anton'").executeUpdate();
+
             session.getTransaction().commit();
         }
         finally {
