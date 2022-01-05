@@ -1,24 +1,26 @@
-package com.melnikov.spring.hibernate;
+package com.melnikov.spring.hibernate_beggining_and_hibernate_one_to_one;
 
-import com.melnikov.spring.hibernate.entity.Employee;
+import com.melnikov.spring.hibernate_beggining_and_hibernate_one_to_one.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class Test {
+/**
+ * Added new entity Detail. No longer will work.
+ */
+public class Test4 {
     public static void main(String[] args) {
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
+                .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
 
         try {
             Session session = sessionFactory.getCurrentSession();
-
-            Employee employee = new Employee("Sergey", "Jopov", "Tokyo", 2250);
-
             session.beginTransaction();
-            session.save(employee);
+
+            session.createQuery("update Employee set salary = 3000 where name = 'Anton'").executeUpdate();
+
             session.getTransaction().commit();
         }
         finally {

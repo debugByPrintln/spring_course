@@ -1,10 +1,13 @@
-package com.melnikov.spring.hibernate;
+package com.melnikov.spring.hibernate_beggining_and_hibernate_one_to_one;
 
-import com.melnikov.spring.hibernate.entity.Employee;
+import com.melnikov.spring.hibernate_beggining_and_hibernate_one_to_one.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * Added new entity Detail. No longer will work.
+ */
 public class Test2 {
     public static void main(String[] args) {
         SessionFactory sessionFactory = new Configuration()
